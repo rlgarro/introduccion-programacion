@@ -62,9 +62,13 @@ c) A partir de las funciones definidas en los item 1 y 2, implementar las funcio
 
 
 ```haskell
--- Funcion compuesta h = f(g(h))
+-- Composicion f o g
 h :: Integer -> Integer
 h n = f (g n)
+
+-- Composicion g o f
+k :: Integer -> Integer
+k n = g (f n)
 ```
 
 ## Ejercicio 2. 
