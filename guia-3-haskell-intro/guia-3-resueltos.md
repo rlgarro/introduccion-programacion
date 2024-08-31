@@ -17,6 +17,14 @@ problema f (n: Z) : Z {
 }
 ```
 
+```haskell
+f :: Integer -> Integer
+f 1 = 8
+f 4 = 131
+f 16 = 16
+```
+
+
 ### Resolucion:
 
 ### Fin resolucion.
@@ -30,7 +38,7 @@ b) Analogamente, especificar e implementar la funcion parcial g :: Integer -> In
 ### Resolucion:
 
 
-#### Primero la especificacion:
+## Especificacion:
 
 ```
 problema g (n: Z) : Z {
@@ -39,12 +47,24 @@ problema g (n: Z) : Z {
 }
 ```
 
+## Codigo:
 
-### Implementacion de la funcion g:
-
-```
-
+```haskell
+g :: Integer -> Integer
+g 8 = 16
+g 16 = 4
+g 131 = 1
 ```
 
 ### Fin resolucion.
 
+c) A partir de las funciones definidas en los item 1 y 2, implementar las funciones parciales h = f o g y k = g o f
+
+
+```haskell
+-- Funcion compuesta h = f(g(h))
+h :: Integer -> Integer
+h n = f (g n)
+```
+
+## Ejercicio 2. 
