@@ -379,6 +379,7 @@ problema invertir(a: t x t) : (t x t) {
 		requiere: {True}
 		asegura: {resultado es la misma a pero invertida}
 }
+```
 
 ```haskell
 invertir :: (t, t) -> (t, t)
