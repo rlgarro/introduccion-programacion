@@ -97,4 +97,26 @@ todoMenor :: (Float,Float) -> (Float,Float) -> Bool
 todoMenor a b = (fst(a) < fst(b) && snd(a) < snd(b))
 
 distanciaPuntos :: (Float, Float) -> (Float, Float) -> Float
-distanciaPuntos a b = sqrt (((fst(b) - fst(a) ) ^ 2) + ((snd(b) - snd(a) ) ^ 2))
+distanciaPuntos (a1, a2) (b1, b2) = sqrt (((b1 - a1) ^ 2) + ((b2 - b2) ^ 2))
+
+sumaTerna :: (Integer, Integer, Integer) -> Integer
+sumaTerna (a, b, c) = a + b + c
+
+sumarSoloMultiplos :: (Integer, Integer, Integer) -> Integer -> Integer
+sumarSoloMultiplos (a, b, c) n = (esMultiploODefault (a,n) 0) + (esMultiploODefault (b,n) 0) + (esMultiploODefault (c,n) 0)
+
+esMultiploODefault :: (Integer, Integer) -> Integer -> Integer
+esMultiploODefault (a, b) n | mod a b == 0 = a
+                            | otherwise = n
+
+posPrimerPar :: (Integer, Integer, Integer) -> Integer
+posPrimerPar (a, b, c) | mod a 2 == 0 = 0
+                       | mod b 2 == 0 = 1
+                       | mod c 2 == 0 = 2
+					   | otherwise = 4
+
+crearPar :: t -> t -> (t, t)
+crearPar a b = (a, b)
+
+invertir :: (t, t) -> (t, t)
+invertir (a, b) = (b, a)

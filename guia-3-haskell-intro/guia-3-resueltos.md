@@ -316,3 +316,71 @@ problema distanciaPuntos(a : R x R, b : R x R) : R {
 distanciaPuntos :: (Float, Float) -> (Float, Float) -> Float
 distanciaPuntos a b = sqrt (((fst(b) - fst(a) ) ^ 2) + ((snd(b) - snd(a) ) ^ 2))
 ```
+
+### d) sumaTerna: Dada una terna de enteros, calcula la suma de sus tres elementos.
+
+```
+problema sumaTerna(a: Z x Z x Z) : Z {
+		requiere: {True}
+		asegura: {resultado es la suma de los tres componentes de a}
+}
+```
+
+```haskell
+sumaTerna :: (Integer, Integer, Integer) -> Integer
+sumaTerna (a, b, c) = a + b + c
+```
+
+### e) sumarSoloMultiplos: Dada una terna de enteros y un natural, calcula la suma de los elementos que son multiplos del numero natural.
+
+```
+problema sumarSoloMultiplos(a: Z x Z x Z, b: Z) {
+		requiere: {b > 0}
+		asegura: {resultado es la suma de los componentes que sean multiplos de b}
+}
+```
+
+```haskell
+sumarSoloMultiplos :: (Integer, Integer, Integer) -> Integer -> Integer
+sumarSoloMultiplos (a, b, c) n = (esMultiploODefault (a,n) 0) + (esMultiploODefault (b,n) 0) + (esMultiploODefault (c,n) 0)
+
+esMultiploODefault :: (Integer, Integer) -> Integer -> Integer
+esMultiploODefault (a, b) n | mod a b == 0 = a
+```
+
+### f) posPrimerPar: Dada una terna de enteros devuelve la posicion del primer par, sino hay uno, devuelve 4.
+
+```
+problema posPrimerPar(a: Z x Z x Z) : Z {
+		requiere: {True}
+		asegura: {resultado es la posicion en la que se encontro al primer numero par, sino hay uno, resultado es 4}
+}
+```
+
+### g) crearPar: crea un par a partir de sus componentes dadas por separado, debe funcionar para cualquier tipo
+
+
+```
+problema crearPar(a: t, b: t) : (t x t) {
+		requiere: {True}
+		asegura: {resultado es una dupla donde la primer componente es a y la segunda es b}
+}
+```
+
+```haskell
+crearPar :: t -> t -> (t, t)
+crearPar a b = (a, b)
+```
+
+### h) invertir: Dada una dupla de cualquier tipo, devolver la misma dupla inveritda.
+
+```
+problema invertir(a: t x t) : (t x t) {
+		requiere: {True}
+		asegura: {resultado es la misma a pero invertida}
+}
+
+```haskell
+invertir :: (t, t) -> (t, t)
+invertir (a, b) = (b, a)
+```
