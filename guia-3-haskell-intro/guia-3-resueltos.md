@@ -2,7 +2,7 @@
 
 ## Ejercicio 1. 
 
-a) Implementar la funcion parcial f :: Integer -> Integer definida por extension de la siguiente manera:
+### a) Implementar la funcion parcial f :: Integer -> Integer definida por extension de la siguiente manera:
 
 - f(1) = 8
 - f(4) = 131
@@ -385,3 +385,84 @@ problema invertir(a: t x t) : (t x t) {
 invertir :: (t, t) -> (t, t)
 invertir (a, b) = (b, a)
 ```
+
+## Ejercicio 5. Implementar la funcion todosMenores :: (Integer, Integer, Integer) -> Bool
+
+
+```
+problema todosMenores(t: Z x Z x Z) : Bool {
+		requiere: {True}
+		asegura: {(res = true) <=> ((f(t0) > g(t0)) ^ (f(t1) > g(t1)) ^ (f(t0) > g(t0)))}
+}
+
+
+problema f1(n: Z) : Z {
+		requiere: {True}
+		asegura: { (n <= 7 => res = n^2) ^ (n > 7 => res = 2n -1)}
+}
+
+problema g1(n: Z) : Z {
+		requiere: {True}
+		asegura: {Si n es un numero par, entonces res = n / 2, en caso contrario res = 3n + 1 }
+}
+```
+
+
+## Ejercicio 6: Usando los siguientes tipos
+
+```
+type Anio = Integer
+type EsBisiesto = Bool
+```
+
+Programar una funcion ```bisiesto :: Anio -> EsBisiesto segun la siguiente especificacion:
+
+```
+problema bisiesto(año : Z) : Bool {
+		requiere: {True}
+		asegura: { res = false <=> año no es multiplo de 4, o año es multiplo de 100 pero no de 400}
+}
+
+Por ejemplo:
+
+bisiesto 1901 --> False
+bisiesto 1900 --> False
+bisiesto 1904 --> True
+bisiesto 2000 --> True
+```
+
+```haskell
+type Anio = Integer
+type EsBisiesto = Bool
+
+bisiesto :: Anio -> EsBisiesto
+bisiesto n | ((esMultiploDe n 4) == False || ((esMultiploDe n 100) && (esMultiploDe n 400) == False)) = False
+           | otherwise = True
+```
+
+## Ejercicio 7: 
+
+### a) Implementar una funcion:
+
+```
+distanciaManhattan :: (Float, Float, Float) -> (Float, Float, Float) -> Float
+
+problema distanciaManhattan(p, q: R x R x R) {
+		requiere: {True}
+		asegura: {res = sum(i =0, 2) {absoluto(pi - qi)} }
+}
+
+Por ejemplo:
+distanciaManhattan (2, 3, 4) (7, 3, 8) --> 9
+distanciaManhattan ((-1), 0, (-8.5)) (3.3, 4, (-4)) --> 12.8
+```
+
+```haskell
+distanciaManhattan :: (Float, Float, Float) -> (Float, Float, Float) -> Float
+distanciaManhattan (t1, t2, t3) (y1, y2, y3) = absolutoBis (t1 - y1) + absolutoBis (t2 - y2) + absolutoBis (t3 - y3)
+
+absolutoBis :: Float -> Float
+absolutoBis n | n >= 0 = n
+              | otherwise = (-1) * n
+```
+

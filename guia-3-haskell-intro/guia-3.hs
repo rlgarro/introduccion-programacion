@@ -113,10 +113,38 @@ posPrimerPar :: (Integer, Integer, Integer) -> Integer
 posPrimerPar (a, b, c) | mod a 2 == 0 = 0
                        | mod b 2 == 0 = 1
                        | mod c 2 == 0 = 2
-					   | otherwise = 4
+                       | otherwise = 4
 
 crearPar :: t -> t -> (t, t)
 crearPar a b = (a, b)
 
 invertir :: (t, t) -> (t, t)
 invertir (a, b) = (b, a)
+
+todosMenores :: (Integer, Integer, Integer) -> Bool
+todosMenores (t1, t2, t3) = ((f1 t1) > (g1 t1)) && ((f1 t2) > (g1 t2)) && ((f1 t2) > (g1 t2))
+
+f1 :: Integer -> Integer
+f1 n | n <= 7 = n ^ 2
+     | otherwise = (2 * n) - 1
+
+g1 :: Integer -> Integer
+g1 n | (esPar n) = div n 2
+     | otherwise = (3 * n) + 1
+
+esPar :: Integer -> Bool
+esPar n = mod n 2 == 0
+
+distanciaManhattan :: (Float, Float, Float) -> (Float, Float, Float) -> Float
+distanciaManhattan (t1, t2, t3) (y1, y2, y3) = absolutoBis (t1 - y1) + absolutoBis (t2 - y2) + absolutoBis (t3 - y3)
+
+absolutoBis :: Float -> Float
+absolutoBis n | n >= 0 = n
+              | otherwise = (-1) * n
+
+type Anio = Integer
+type EsBisiesto = Bool
+
+bisiesto :: Anio -> EsBisiesto
+bisiesto n | ((esMultiploDe n 4) == False || ((esMultiploDe n 100) && (esMultiploDe n 400) == False)) = False
+           | otherwise = True
