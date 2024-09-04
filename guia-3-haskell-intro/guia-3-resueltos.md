@@ -269,3 +269,49 @@ estanRelacionados a b | (mod numerador denominador) == 0 = True
 					  numerador = a * a
 					  denominador = a * b
 ```
+
+## Ejercicio 4. Especificar e implementar las siguientes funciones, utilizando tuplas para representar pares, ternas de numeros.
+
+### a) prodInt: calcula el producto interno entre dos tuplas R x R
+
+```problema prodInt(a : R x R, b : R x R) : R {
+		requiere: {True}
+		asegura: { resulado es el producto interno entre a y b}
+}
+```
+
+```haskell
+prodInt :: (Number, Number) -> (Number, Number) -> Number
+prodInt = 1
+
+prodInt :: (Float, Float) -> (Float, Float) -> Float
+prodInt a b = (fst (a) * fst(b)) + (snd(a) * snd(b))
+```
+
+### b) todoMenor: Dadas dos tuplas RxR decide si todas las coordenadas de la primera son menores que los de la segunda.
+
+```
+problema todoMenor(a : R x R, b : R x R) : Bool {
+		requiere: {True}
+		asegura: {resultado es True si la primera y segunda coordenada de a es menor a la primera y segunda de b}
+}
+```
+
+```haskell
+todoMenor :: (Float,Float) -> (Float,Float) -> Bool
+todoMenor a b = (fst(a) < fst(b) && snd(a) < snd(b))
+```
+
+### c) distanciaPuntos: Calcula la distancia entre dos puntos de R x R.
+
+```
+problema distanciaPuntos(a : R x R, b : R x R) : R {
+		requiere: {True}
+		asegura: {resultado es la distancia entre a y b}
+}
+```
+
+```haskell
+distanciaPuntos :: (Float, Float) -> (Float, Float) -> Float
+distanciaPuntos a b = sqrt (((fst(b) - fst(a) ) ^ 2) + ((snd(b) - snd(a) ) ^ 2))
+```

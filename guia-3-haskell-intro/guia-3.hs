@@ -86,6 +86,15 @@ digitoDecenas n | n <= 9 = undefined
 estanRelacionados :: Integer -> Integer -> Bool
 estanRelacionados a b | (mod numerador denominador) == 0 = True
                       | otherwise = False
-                     where
-					  numerador = a * a
-					  denominador = a * b
+                      where
+                      numerador = a * a
+                      denominador = a * b
+
+prodInt :: (Float, Float) -> (Float, Float) -> Float
+prodInt a b = (fst (a) * fst(b)) + (snd(a) * snd(b))
+
+todoMenor :: (Float,Float) -> (Float,Float) -> Bool
+todoMenor a b = (fst(a) < fst(b) && snd(a) < snd(b))
+
+distanciaPuntos :: (Float, Float) -> (Float, Float) -> Float
+distanciaPuntos a b = sqrt (((fst(b) - fst(a) ) ^ 2) + ((snd(b) - snd(a) ) ^ 2))
