@@ -247,3 +247,25 @@ digitoDecenas :: Integer -> Integer
 digitoDecenas n | n <= 9 = undefined
                 | otherwise = mod (div n 10) 10
 ```
+
+## Ejercicio 3. Implementar una funcion estanRelacionados :: Integer -> Integer -> Bool 
+
+```
+problema estanRelacionados(a : Z, b : Z) {
+		requiere: {a != 0 ^ b != 0}
+		asegura: {(res = true) <-> a * a + a * b * k = 0 para algun k entero con k != 0}
+}
+
+Por ejemplo:
+estanRelacionados 8 2 -> True porque existe un k = -4 tal que 8^2 + 8*2*(-4) = 0
+estanRelacionados 7 3 -> False porque no existe un k entero tal que 7^2 = 7 * 3 * k = 0
+```
+
+```
+estanRelacionados :: Integer -> Integer -> Bool
+estanRelacionados a b | (mod numerador denominador) == 0 = True
+                      | otherwise = False
+                     where
+					  numerador = a * a
+					  denominador = a * b
+```

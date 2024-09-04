@@ -82,3 +82,10 @@ digitoUnidades n = mod n 10
 digitoDecenas :: Integer -> Integer
 digitoDecenas n | n <= 9 = undefined
                 | otherwise = mod (div n 10) 10
+
+estanRelacionados :: Integer -> Integer -> Bool
+estanRelacionados a b | (mod numerador denominador) == 0 = True
+                      | otherwise = False
+                     where
+					  numerador = a * a
+					  denominador = a * b
