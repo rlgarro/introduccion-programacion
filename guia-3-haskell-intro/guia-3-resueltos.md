@@ -274,7 +274,8 @@ estanRelacionados a b | (mod numerador denominador) == 0 = True
 
 ### a) prodInt: calcula el producto interno entre dos tuplas R x R
 
-```problema prodInt(a : R x R, b : R x R) : R {
+```
+problema prodInt(a : R x R, b : R x R) : R {
 		requiere: {True}
 		asegura: { resulado es el producto interno entre a y b}
 }
