@@ -415,7 +415,7 @@ type Anio = Integer
 type EsBisiesto = Bool
 ```
 
-Programar una funcion ```bisiesto :: Anio -> EsBisiesto segun la siguiente especificacion:
+Programar una funcion ```bisiesto :: Anio -> EsBisiesto``` segun la siguiente especificacion:
 
 ```
 problema bisiesto(año : Z) : Bool {
