@@ -14,3 +14,17 @@ invertir n | n <= 9 = n
 cantidadDigitos :: Integer -> Integer
 cantidadDigitos n | n <= 9 = 1
                   | otherwise = 1 + (cantidadDigitos (div n 10))
+
+-- Ejercicio 10: Especificar e implementar una funcion eAprox :: Integer -> Float que aproxime el valor del numero e a partir de la siguiente sumatoria:
+-- e(n) = sum(i = 0, n) { 1 / i! }
+
+-- Para esto necesitamos la funcion factorial, despues el resto es una sumatoria bien bien -- sencilla.
+
+eAprox :: Integer -> Float
+eAprox 0 = 1
+eAprox n = (1 / fromInteger (factorial n)) + (eAprox (n - 1))
+
+factorial :: Integer -> Integer
+factorial 0 = 1
+factorial 1 = 1
+factorial n = n * factorial(n - 1)
