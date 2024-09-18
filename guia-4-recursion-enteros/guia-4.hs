@@ -36,4 +36,17 @@ sucesionRaizDeDos 1 = 2
 sucesionRaizDeDos n = 2 + 1 / sucesionRaizDeDos (n - 1)
 
 raizDe2Aprox :: Integer -> Float
-raizDe2Aprox n = sucesionRaizDeDos n) - 1
+raizDe2Aprox n = (sucesionRaizDeDos n) - 1
+
+-- Ejercicio 13: Especificar e implementar la siguiente funcion:
+-- $$f(n, m) = \sum_{i=1}^{n} \sum_{j=1}^{m}i^j$$
+
+f :: Integer -> Integer -> Integer
+f 1 m = (serieGeometrica m 1) - 1
+f n m = ((serieGeometrica m n) - 1) + (f (n - 1) m)
+
+-- Defino una funcion para la serie geometrica
+
+serieGeometrica :: Integer -> Integer -> Integer
+serieGeometrica n 1 = n + 1
+serieGeometrica n q = ((q ^ (n + 1)) - 1) `div` (q - 1)

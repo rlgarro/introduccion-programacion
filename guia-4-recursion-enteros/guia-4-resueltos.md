@@ -67,3 +67,8 @@ sucesionRaizDeDos n = 2 + 1 / sucesionRaizDeDos (n - 1)
 raizDe2Aprox :: Integer -> Float
 raizDe2Aprox n = sucesionRaizDeDos n) - 1
 ```
+
+## Ejercicio 13: Especificar e implementar la siguiente funcion:
+
+
+$$f(n, m) = \sum_{i=1}^{n} \sum_{j=1}^{m}i^j$$
