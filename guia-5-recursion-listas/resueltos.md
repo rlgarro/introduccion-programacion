@@ -66,6 +66,14 @@ problema pertenece(e: T, s: seq<T>): B {
 }
 ```
 
+```haskell
+pertenece :: (Eq t) => t -> [t] -> Bool
+pertenece n lista | (lista == []) = False 
+                  | (head lista) == n = True
+                  | otherwise = pertenece n (tail lista)
+
+```
+
 ### 2. todosIguales :: (Eq t) -> [t] -> Bool
 
 ```
@@ -73,6 +81,14 @@ problema todosIguales(s: seq<T>): B {
 		requiere: {True}
 		asegura: {resultado = true <=> cada elemento de s es igual || s es vacio}
 }
+```
+
+```haskell
+todosIguales :: (Eq t) => [t] -> Bool
+todosIguales [] = True
+todosIguales [t1, t2] = t1 == t2
+todosIguales (x:xs) | x /= (head xs) = False
+                    | otherwise = todosIguales xs
 ```
 
 ### 3. todosDistintos :: (Eq t) -> [t] -> Bool
@@ -121,4 +137,24 @@ problema mismosElementos(s: seq<T>, r: seq<T>) : B {
 problema capicua(s: seq<T>) : B {
 		asegura: {resultado = true <=> s = reverso(s)}
 }
+```
+
+# Ejercicio 3
+
+### 3. maximo
+
+```
+problema maximo(s: seq<Z>)) : Z {
+	requiere: { |s| > 0}
+	asegura: { resultado pertenece a S ^ resultado es el elemento mas grande de la lista}
+}
+```
+
+```haskell
+maximo :: (Ord t) => [t] -> t
+maximo [t] = t
+maximo (x:xs) | x >= maximo_tail = x
+              | otherwise = maximo_tail
+             where
+             maximo_tail = maximo xs
 ```
