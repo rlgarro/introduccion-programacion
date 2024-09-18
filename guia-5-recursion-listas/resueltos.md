@@ -54,3 +54,71 @@ reverso [] = []
 reverso [t1,t2] = [t2, t1]
 reverso lista = (ultimo lista) : (reverso (principio lista))
 ```
+
+# Ejercicio 2. Definir las siguientes funciones sobre listas:
+
+### 1. pertenece :: (Eq t) -> t -> [t] -> Bool
+
+```
+problema pertenece(e: T, s: seq<T>): B {
+		requiere: {True}
+		asegura: { resultado = true <=> e pertenece a s}
+}
+```
+
+### 2. todosIguales :: (Eq t) -> [t] -> Bool
+
+```
+problema todosIguales(s: seq<T>): B {
+		requiere: {True}
+		asegura: {resultado = true <=> cada elemento de s es igual || s es vacio}
+}
+```
+
+### 3. todosDistintos :: (Eq t) -> [t] -> Bool
+
+```
+problema todosDisintos(s: seq<T>) : B {
+		requiere: {True}
+		// asegura original: asegura: {resultado = false <=> existen dos elementos de s con el mismo valor}
+		// asegura mio
+		asegura: {resultado = true <=> no existen dos elementos iguales}
+}
+```
+
+### 4. hayRepetidos :: (Eq t) -> [t] -> Bool
+
+
+```
+problema hayRepetidos(s: seq<T>) : B {
+		asegura: {resultado = true <=> existen dos posiciones de s con el mismo valor}
+}
+```
+
+### 5. quitar :: (Eq t) -> t -> [t] -> [t]
+
+### 6. quitarTodos :: (Eq t) -> t -> [t] -> [t]
+
+```
+problema quitarTodos(e: T, s: seq<T>) : seq<T> {
+		asegura: { resultado es s pero sin el elemento e}
+}
+```
+
+### 7. eliminarRepetidos :: (Eq t) -> [t] -> [t]
+
+### 8. mismosElementos :: (Eq t) -> [t] -> [t] -> Bool
+
+```
+problema mismosElementos(s: seq<T>, r: seq<T>) : B {
+		asegura: {resultado = true <=> todo elemento de s esta en r y viceversa}
+}
+```
+
+### 9. capicua :: (Eq t) -> [t] -> Bool
+
+```
+problema capicua(s: seq<T>) : B {
+		asegura: {resultado = true <=> s = reverso(s)}
+}
+```

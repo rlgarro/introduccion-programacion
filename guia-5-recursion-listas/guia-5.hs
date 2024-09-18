@@ -17,3 +17,13 @@ reverso :: [t] -> [t]
 reverso [] = []
 reverso [t1,t2] = [t2, t1]
 reverso lista = (ultimo lista) : (reverso (principio lista))
+
+-- Ejercicio 2:
+
+pertenece :: (Eq t) => t -> [t] -> Bool
+pertenece n lista | (lista == []) = False 
+                  | (head lista) == n = True
+                  | otherwise = pertenece n (tail lista)
+
+todosIguales :: (Eq t) => [t] -> Bool
+todosIguales lista | [] = True
