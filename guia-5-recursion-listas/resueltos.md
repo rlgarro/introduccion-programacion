@@ -158,3 +158,12 @@ maximo (x:xs) | x >= maximo_tail = x
              where
              maximo_tail = maximo xs
 ```
+
+### 9. Ordenar
+
+```haskell
+ordenar :: (Ord t) => [t] -> [t]
+ordenar [] = []
+ordenar xs = ordenar (quitar maximo_lista xs) ++ [maximo_lista]
+           where maximo_lista = maximo xs
+```
