@@ -162,12 +162,29 @@ problema mismosElementos(s: seq<T>, r: seq<T>) : B {
 }
 ```
 
+```haskell
+mismosElementos :: (Eq t) => [t] -> [t] -> Bool
+mismosElementos lista1 lista2 = (contieneTodos lista1 lista2) && (contieneTodos lista2 lista1)
+
+
+-- Si la primera lista contiene todos los de la segunda
+contieneTodos :: (Eq t) => [t] -> [t] -> Bool
+contieneTodos _ [] = True
+contieneTodos lista1 (y:ys) | pertenece y lista1 = contieneTodos lista1 ys
+                            | otherwise = False
+```
+
 ### 9. capicua :: (Eq t) -> [t] -> Bool
 
 ```
 problema capicua(s: seq<T>) : B {
 		asegura: {resultado = true <=> s = reverso(s)}
 }
+```
+
+```haskell
+capicua :: (Eq t) => [t] -> Bool
+capicua lista = lista == (reverso lista)
 ```
 
 # Ejercicio 3

@@ -53,6 +53,19 @@ eliminarRepetidos :: (Eq t) => [t] -> [t]
 eliminarRepetidos (x:xs) | (hayRepetidos (x : xs)) = x : eliminarRepetidos (quitarTodos x xs) 
                          | otherwise = x : xs
 
+mismosElementos :: (Eq t) => [t] -> [t] -> Bool
+mismosElementos lista1 lista2 = (contieneTodos lista1 lista2) && (contieneTodos lista2 lista1)
+
+
+-- Si la primera lista contiene todos los de la segunda
+contieneTodos :: (Eq t) => [t] -> [t] -> Bool
+contieneTodos _ [] = True
+contieneTodos lista1 (y:ys) | pertenece y lista1 = contieneTodos lista1 ys
+                            | otherwise = False
+
+capicua :: (Eq t) => [t] -> Bool
+capicua lista = lista == (reverso lista)
+
 -- Ejercicio 3
 
 maximo :: (Ord t) => [t] -> t
