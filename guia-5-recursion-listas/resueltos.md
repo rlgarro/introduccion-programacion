@@ -118,7 +118,19 @@ problema hayRepetidos(s: seq<T>) : B {
 }
 ```
 
+```haskell
+hayRepetidos :: (Eq t) => [t] -> Bool
+hayRepetidos elementos = not (todosDistintos elementos)
+```
+
 ### 5. quitar :: (Eq t) -> t -> [t] -> [t]
+
+```haskell
+quitar :: (Eq t) => t -> [t] -> [t]
+quitar _ [] = []
+quitar elem (x:xs) | elem == x = xs
+                   | otherwise = x : (quitar elem xs)
+```
 
 ### 6. quitarTodos :: (Eq t) -> t -> [t] -> [t]
 
@@ -128,7 +140,19 @@ problema quitarTodos(e: T, s: seq<T>) : seq<T> {
 }
 ```
 
+```haskell
+quitarTodos :: (Eq t) => t -> [t] -> [t]
+quitarTodos elem lista | not (pertenece elem lista) = lista
+                       | otherwise = quitarTodos elem (quitar elem lista)
+```
+
 ### 7. eliminarRepetidos :: (Eq t) -> [t] -> [t]
+
+```haskell
+eliminarRepetidos :: (Eq t) => [t] -> [t]
+eliminarRepetidos (x:xs) | (hayRepetidos (x : xs)) = x : eliminarRepetidos (quitarTodos x xs) 
+                         | otherwise = x : xs
+```
 
 ### 8. mismosElementos :: (Eq t) -> [t] -> [t] -> Bool
 

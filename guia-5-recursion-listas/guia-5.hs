@@ -36,10 +36,22 @@ todosDistintos [] = True
 todosDistintos (x:xs) | (pertenece x xs) = False
                       | otherwise = todosDistintos xs
 
+hayRepetidos :: (Eq t) => [t] -> Bool
+hayRepetidos elementos = not (todosDistintos elementos)
+
+
 quitar :: (Eq t) => t -> [t] -> [t]
 quitar _ [] = []
 quitar elem (x:xs) | elem == x = xs
                    | otherwise = x : (quitar elem xs)
+
+quitarTodos :: (Eq t) => t -> [t] -> [t]
+quitarTodos elem lista | not (pertenece elem lista) = lista
+                       | otherwise = quitarTodos elem (quitar elem lista)
+
+eliminarRepetidos :: (Eq t) => [t] -> [t]
+eliminarRepetidos (x:xs) | (hayRepetidos (x : xs)) = x : eliminarRepetidos (quitarTodos x xs) 
+                         | otherwise = x : xs
 
 -- Ejercicio 3
 
