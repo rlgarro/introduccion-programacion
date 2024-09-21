@@ -31,6 +31,11 @@ todosIguales [t1, t2] = t1 == t2
 todosIguales (x:xs) | x /= (head xs) = False
                     | otherwise = todosIguales xs
 
+todosDistintos :: (Eq t) => [t] -> Bool
+todosDistintos [] = True
+todosDistintos (x:xs) | (pertenece x xs) = False
+                      | otherwise = todosDistintos xs
+
 quitar :: (Eq t) => t -> [t] -> [t]
 quitar _ [] = []
 quitar elem (x:xs) | elem == x = xs

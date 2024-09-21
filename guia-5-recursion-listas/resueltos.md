@@ -102,6 +102,13 @@ problema todosDisintos(s: seq<T>) : B {
 }
 ```
 
+```haskell
+todosDistintos :: (Eq t) => [t] -> Bool
+todosDistintos [] = True
+todosDistintos (x:xs) | (pertenece x xs) = False
+                      | otherwise = todosDistintos xs
+```
+
 ### 4. hayRepetidos :: (Eq t) -> [t] -> Bool
 
 
