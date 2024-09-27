@@ -88,3 +88,14 @@ asegura: {Para todo 0 <= i < |precios|, si stockDeProducto(stock, precios[i]_0) 
 asegura: {Para todo 0 <= i < |precios|, si stockDeProducto(stock, precios[i]_0) <= 10, entonces res[i]_0 = precios[i]_0 y res[i]_1 = precios[i]_1}
 }
 ```
+
+```haskell
+aplicarOferta :: [(String, Int)] -> [(String, Float)] -> [(String, Float)]
+aplicarOferta _ [] = []
+aplicarOferta stock (precio:preciosRestantes) = (fst precio, precioFinalProducto) : (aplicarOferta stock preciosRestantes)
+                                              where precioFinalProducto = getPrecioFinalProducto (snd precio) (stockDeProducto stock (fst precio))
+
+getPrecioFinalProducto :: Float -> Int -> Float
+getPrecioFinalProducto precioOriginal stock | stock > 10 = precioOriginal * 0.8
+                                            | otherwise = precioOriginal
+```
