@@ -40,3 +40,51 @@ contarProducto nombreProducto [] = (nombreProducto, 1)
 contarProducto nombreProducto (productoActual:resto) | nombreProducto == productoActual = (nombreProducto, snd (contarProducto nombreProducto resto) + 1)
                                                      | otherwise = (contarProducto nombreProducto resto)
 ```
+
+### Ejercicio 2. Implementar la funcion stockDeProducto :: [(String, Int)] -> String -> Int
+
+```
+problema stockDeProducto(stock: seq<String x Z>, producto: String) : Z {
+    requiere: {No hay productos repetidos en stock}
+    requiere: {Todas las cantidades (segundas componentes) de stock son mayores a cero}
+    asegura: {(res = 0 si producto no se encuentra en el stock) o (existe un i tal que 0<= i < |stock| y producto = stock[i]_0 y res = stock[i]_1}
+}
+```
+
+```haskell
+stockDeProducto :: [(String, Int)] -> String -> Int
+stockDeProducto [] _ = 0
+stockDeProducto (producto:productos) nombreProducto | fst producto == nombreProducto = snd producto
+                                                    | otherwise = stockDeProducto productos nombreProducto
+```
+
+### Ejercicio 3. Implementar la funcion dineroEnStock :: [(String, Int)] -> [(String, Float)] -> Float
+
+```haskell
+dineroEnStock :: [(String, Int)] -> [(String, Float)] -> Float
+dineroEnStock [] _ = 0
+dineroEnStock (productoActual:productosRestantes) precios = (precioProducto * fromIntegral (snd productoActual)) + (dineroEnStock productosRestantes precios)
+                                                          where precioProducto = precioDeProducto (fst productoActual) precios
+
+precioDeProducto :: String -> [(String, Float)] -> Float
+precioDeProducto producto (precioProducto:preciosRestantes) | producto == (fst precioProducto) = snd precioProducto
+                                                            | otherwise = precioDeProducto producto preciosRestantes
+
+```
+
+### Ejercicio 4. Implementar la funcion aplicarOferta :: [(String, Int)] -> [(String, Float)] -> [(String, Float])
+
+
+```
+problema aplicarOferta(stock: seq<String x Z>, precios: seq<String x R>) : seq<String x R> {
+
+requiere: {No hay productos repetidos en stock}
+requiere: {No hay productos repetidos en precios}
+requiere: {Todas las cantidades (segundas componentes) de stock son mayores a cero}
+requiere: {Todas los precios (segundas componentes) de precios son mayores a cero}
+requiere: {Todo producto de stock aparece en la lista de precios}
+asegura: {|res| = |precios|}
+asegura: {Para todo 0 <= i < |precios|, si stockDeProducto(stock, precios[i]_0) > 10, entonces res[i]_0 = precios[i]_0 y res[i]_1 = precios[i]_1 * 0.80 }
+asegura: {Para todo 0 <= i < |precios|, si stockDeProducto(stock, precios[i]_0) <= 10, entonces res[i]_0 = precios[i]_0 y res[i]_1 = precios[i]_1}
+}
+```
