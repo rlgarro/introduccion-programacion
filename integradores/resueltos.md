@@ -99,3 +99,76 @@ getPrecioFinalProducto :: Float -> Int -> Float
 getPrecioFinalProducto precioOriginal stock | stock > 10 = precioOriginal * 0.8
                                             | otherwise = precioOriginal
 ```
+
+
+### Ejercicio 5. Implementar la funcion maximo :: Tablero -> Int
+
+```
+problema maximo(t: Tablero) : Z {
+requiere: {El tablero t es un tablero bien formado, es decir, la longitud de todas las filas es la misma y tienen al menos un elemento}
+requiere: {Existe al menos una columna en el tablero t}
+requiere: {El tablero t no es vacio, todos los numeros del tablero son positivos, mayor estricto a 0}
+asegura: {res es igual al numero mas grande del tablero t}
+}
+```
+
+```haskell
+type Fila = [Int]
+type Tablero = [Fila] -- Cada fila tiene de forma asegurada al pasarse como param, la misma longitud. Tablero viene a ser [[...], [...]..., [...]]
+type Posicion = (Int, Int) -- (fila, columna)
+type Camino = [Posicion]
+
+
+maximo :: Tablero -> Int
+maximo [unicaFila] = maximoEnFila unicaFila
+maximo (filaActual:restoDeFilas) | maximoEnFila filaActual > maximo restoDeFilas = maximoEnFila filaActual
+                                 | otherwise = maximo restoDeFilas
+
+maximoEnFila :: Fila -> Int
+maximoEnFila [ultimo] = ultimo
+maximoEnFila (actual:restoDeFila) | actual > maximoFilaRestante = actual
+```
+
+### Ejercicio 6. Implementar la funcion masRepetido : Tablero -> Int
+
+```
+problema masRepetido(t: Tablero) : Z {
+requiere: {El tablero t es un tablero bien formado, es decir, la longitud de todas las filas es la misma y tienen al menos un elemento}
+requiere: {Existe al menos una columna en el tablero t}
+requiere: {El tablero t no es vacio, todos los numeros del tablero son positivos, mayor estricto a 0},
+asegura: {res es igual al numero que mas eces aparece en un tablero t. Si hay empate devuelve cualquiera de ellos}
+}
+```
+
+```haskell
+type Aparicion = (Int,Int) -- (numero, cantidad de apariciones de numero)
+
+-- La idea es no procesar fila a fila quien se repite mas y sumarlo mientras se iteran las filas, sino unificar todas las filas en una sola para despues comparar quien se repite mas entre una sola fila. De esta forma se simplifica mucho el problema.
+
+masRepetido :: Tablero -> Int
+masRepetido tablero = fst (masOcurrente (apariciones (unificarEnFila tablero)))
+
+masOcurrente :: [Aparicion] -> Aparicion
+masOcurrente [aparicion] = aparicion
+masOcurrente (actual:restoApariciones) | snd actual > snd (masOcurrente restoApariciones) = actual
+                                       | otherwise = masOcurrente restoApariciones
+
+unificarEnFila :: Tablero -> Fila
+unificarEnFila [] = []
+unificarEnFila (filaActual:restoFilas) = (unificarEnFila restoFilas) ++ filaActual
+
+quitarTodos :: (Eq a) => a -> [a] -> [a]
+quitarTodos _ [] = []
+quitarTodos elem (x:xs) | elem == x = quitarTodos elem xs
+                        | otherwise = x : quitarTodos elem xs
+
+apariciones :: Fila -> [Aparicion]
+apariciones [] = []
+apariciones (elemento:elementosRestantes) = (elemento, (snd aparicionElemActual) + 1) : apariciones (quitarTodos elemento elementosRestantes)
+                                          where aparicionElemActual = (aparicion elemento elementosRestantes)
+
+aparicion :: Int -> Fila -> Aparicion
+aparicion n [] = (n, 0)
+aparicion n (elemActual:restoFila) | n == elemActual = (n, snd (aparicion n restoFila) + 1)
+                                   | otherwise = (n, snd (aparicion n restoFila))
+```

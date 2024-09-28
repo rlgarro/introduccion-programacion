@@ -42,3 +42,53 @@ aplicarOferta stock (precio:preciosRestantes) = (fst precio, precioFinalProducto
 getPrecioFinalProducto :: Float -> Int -> Float
 getPrecioFinalProducto precioOriginal stock | stock > 10 = precioOriginal * 0.8
                                             | otherwise = precioOriginal
+
+-- Ejercicio 5
+
+type Fila = [Int]
+type Tablero = [Fila] -- Cada fila tiene de forma asegurada al pasarse como param, la misma longitud. Tablero viene a ser [[...], [...]..., [...]]
+type Posicion = (Int, Int) -- (fila, columna)
+type Camino = [Posicion]
+
+
+maximo :: Tablero -> Int
+maximo [unicaFila] = maximoEnFila unicaFila
+maximo (filaActual:restoDeFilas) | maximoEnFila filaActual > maximo restoDeFilas = maximoEnFila filaActual
+                                 | otherwise = maximo restoDeFilas
+
+maximoEnFila :: Fila -> Int
+maximoEnFila [ultimo] = ultimo
+maximoEnFila (actual:restoDeFila) | actual > maximoFilaRestante = actual
+                                  | otherwise = maximoFilaRestante
+                                   where maximoFilaRestante = maximoEnFila restoDeFila
+
+-- Ejercicio 6
+
+type Aparicion = (Int,Int) -- (numero, cantidad de apariciones de numero)
+
+masRepetido :: Tablero -> Int
+masRepetido tablero = fst (masOcurrente (apariciones (unificarEnFila tablero)))
+
+masOcurrente :: [Aparicion] -> Aparicion
+masOcurrente [aparicion] = aparicion
+masOcurrente (actual:restoApariciones) | snd actual > snd (masOcurrente restoApariciones) = actual
+                                       | otherwise = masOcurrente restoApariciones
+
+unificarEnFila :: Tablero -> Fila
+unificarEnFila [] = []
+unificarEnFila (filaActual:restoFilas) = (unificarEnFila restoFilas) ++ filaActual
+
+quitarTodos :: (Eq a) => a -> [a] -> [a]
+quitarTodos _ [] = []
+quitarTodos elem (x:xs) | elem == x = quitarTodos elem xs
+                        | otherwise = x : quitarTodos elem xs
+
+apariciones :: Fila -> [Aparicion]
+apariciones [] = []
+apariciones (elemento:elementosRestantes) = (elemento, (snd aparicionElemActual) + 1) : apariciones (quitarTodos elemento elementosRestantes)
+                                          where aparicionElemActual = (aparicion elemento elementosRestantes)
+
+aparicion :: Int -> Fila -> Aparicion
+aparicion n [] = (n, 0)
+aparicion n (elemActual:restoFila) | n == elemActual = (n, snd (aparicion n restoFila) + 1)
+                                   | otherwise = (n, snd (aparicion n restoFila))
