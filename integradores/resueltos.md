@@ -174,3 +174,15 @@ aparicion n [] = (n, 0)
 aparicion n (elemActual:restoFila) | n == elemActual = (n, snd (aparicion n restoFila) + 1)
                                    | otherwise = (n, snd (aparicion n restoFila))
 ```
+
+### Ejercicio 7. Implementar la funcion valoresDeCamino :: Tablero -> Camino -> [Int]
+
+```
+problema valoresDeCamino(t: Tablero, c: Camino) : Z {
+requiere: {El tablero t es un tablero bien formado, es decir, la longitud de todas las filas es la misma y tienen al menos un elemento}
+requiere: {Existe al menos una columna en el tablero t}
+requiere: {El tablero t no es vacio, todos los numeros del tablero son positivos, mayor estricto a 0},
+requiere: {El camino c es un camino valido, es decir, secuencia de posiciones adyacentes en la que solo es posible desplazarse hacia la posicion de la derecha o hacia y abajo y todas las posiciones estan dentro de los limites del tablero t}
+asegura: {res es igual a la secuencia de numeros que estan en el camino c, ordenados de la misma forma que aparecen las posiciones correspondientes en el camino}
+}
+```
