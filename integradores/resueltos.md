@@ -143,7 +143,9 @@ asegura: {res es igual al numero que mas eces aparece en un tablero t. Si hay em
 ```haskell
 type Aparicion = (Int,Int) -- (numero, cantidad de apariciones de numero)
 
--- La idea es no procesar fila a fila quien se repite mas y sumarlo mientras se iteran las filas, sino unificar todas las filas en una sola para despues comparar quien se repite mas entre una sola fila. De esta forma se simplifica mucho el problema.
+-- La idea es no procesar fila a fila quien se repite mas y sumarlo mientras se iteran las filas,
+-- sino unificar todas las filas en una sola para despues comparar quien se repite mas entre una sola fila.
+-- De esta forma se simplifica mucho el problema.
 
 masRepetido :: Tablero -> Int
 masRepetido tablero = fst (masOcurrente (apariciones (unificarEnFila tablero)))
