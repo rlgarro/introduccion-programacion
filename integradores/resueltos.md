@@ -220,3 +220,14 @@ problema esCaminoFibo (s:seq<Z>, i: Z) : Bool {
     asegura: {res = true <=> los valores de s son la sucesion de Fibonacci inicializada con el numero pasado como paratro i}
 }
 ```
+```haskell
+esCaminoFibo :: [Int] -> Int -> Bool
+esCaminoFibo [ultimoValor] indice = ultimoValor == (fibonacci indice)
+esCaminoFibo (valor:valores) indiceActual = (valor == fibonacci indiceActual) && esCaminoFibo valores (indiceActual + 1)
+
+
+fibonacci :: Int -> Int
+fibonacci 0 = 0
+fibonacci 1 = 1
+fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
+```
