@@ -95,28 +95,24 @@ aparicion n (elemActual:restoFila) | n == elemActual = (n, snd (aparicion n rest
 
 -- Ejercicio 7
 
+valoresDeCamino :: Tablero -> Camino -> [Int]
+valoresDeCamino tablero camino = valores tablero camino 1
 
--- Dado un tablero y una posicion me gustaria poder obtener el numero que alli se encuentra, esto haria mucho mas facil hacer este ejercicio.
--- Ya que solo tendria que iterar las posiciones de camino y ir agregando ese resultado de aplicar esta funcion a la lista.
+obtenerElemento :: Posicion -> Fila -> Int -> Int
+obtenerElemento (fila, columna) (elemActual:elementos) indiceElemento | columna /= indiceElemento = obtenerElemento (fila, columna) elementos (indiceElemento + 1)
+                                                                      | otherwise = elemActual
 
---valoresDeCaminoG
+obtenerPorPosicion :: Posicion -> Fila -> Int
+obtenerPorPosicion posicion fila = obtenerElemento posicion fila 1
 
-posicionesCanonicas :: Int -> Camino -> [Int]
-posicionesCanonicas _ [] = []
-posicionesCanonicas largoFila (pos:restoPosiciones) = ((fst pos) - 1) * largoFila + (snd pos) : (posicionesCanonicas largoFila restoPosiciones)
 
-obtenerElementosEnIndices :: [Int] -> [Int] -> [Int]
-obtenerElementosEnIndices [] _ = []
-obtenerElementosEnIndices _ [] = []
--- Asumo que mi lista de elementos que me dan es la lista completa
-obtenerElementosEnIndices (indiceActual:indices) (elementoActual:elementos) = 
+filaPosicion :: Posicion -> Int
+filaPosicion (n, _) = n
 
---obtenerValor :: Tablero -> Posicion -> Int
---obtenerValor
-
--- por ahi para esto se puede abusar de que las filas tienen todas el mismo largo.
--- si tengo un tablero con 3 filas con 4 elementos por fila, yo se que la primera fila empieza en el (1,1) (indx: 1) y termina en (1,4) (indx: 4)
--- la segunda empieza en (2,1) (indx: 5 = (2 - 1) * 4 + 1) y termina en (2,4) (indx: 8 = (2 - 1) * 4 + 4)
--- la tercera empieza en (3,1) (indx: 9 = (3 - 1) * 4 + 1) y termina en (3,4) (indx: 12 = (3 - 1) * 4 + 4)
--- [[1,2,3,4], [10,11,12,13]] (2,1) = 10, (2,3) = 12
--- elemento random = (fila, columna) = (fila - 1) * len(filas) + columna
+valores :: Tablero -> Camino -> Int -> [Int]
+valores _ [] _ = []
+valores [] _ _ = []
+valores (fila:filas) [ultimaPosicion] _ = (obtenerPorPosicion ultimaPosicion fila) : []
+valores (fila:filas) (posicion:posicionSiguiente:posiciones) filaActual | (filaPosicion posicion) /= filaActual = valores filas (posicion:posicionSiguiente:posiciones) (filaActual + 1)
+                                                                        | (filaPosicion posicion) == (filaPosicion posicionSiguiente) = (obtenerPorPosicion posicion fila) : valores (fila:filas) (posicionSiguiente:posiciones) filaActual
+                                                                        | otherwise = (obtenerPorPosicion posicion fila) : (valores filas (posicionSiguiente:posiciones) (filaActual + 1))

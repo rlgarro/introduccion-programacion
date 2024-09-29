@@ -186,3 +186,27 @@ requiere: {El camino c es un camino valido, es decir, secuencia de posiciones ad
 asegura: {res es igual a la secuencia de numeros que estan en el camino c, ordenados de la misma forma que aparecen las posiciones correspondientes en el camino}
 }
 ```
+
+```haskell
+valoresDeCamino :: Tablero -> Camino -> [Int]
+valoresDeCamino tablero camino = valores tablero camino 1
+
+obtenerElemento :: Posicion -> Fila -> Int -> Int
+obtenerElemento (fila, columna) (elemActual:elementos) indiceElemento | columna /= indiceElemento = obtenerElemento (fila, columna) elementos (indiceElemento + 1)
+                                                                      | otherwise = elemActual
+
+obtenerPorPosicion :: Posicion -> Fila -> Int
+obtenerPorPosicion posicion fila = obtenerElemento posicion fila 1
+
+
+filaPosicion :: Posicion -> Int
+filaPosicion (n, _) = n
+
+valores :: Tablero -> Camino -> Int -> [Int]
+valores _ [] _ = []
+valores [] _ _ = []
+valores (fila:filas) [ultimaPosicion] _ = (obtenerPorPosicion ultimaPosicion fila) : []
+valores (fila:filas) (posicion:posicionSiguiente:posiciones) filaActual | (filaPosicion posicion) /= filaActual = valores filas (posicion:posicionSiguiente:posiciones) (filaActual + 1)
+                                                                        | (filaPosicion posicion) == (filaPosicion posicionSiguiente) = (obtenerPorPosicion posicion fila) : valores (fila:filas) (posicionSiguiente:posiciones) filaActual
+                                                                        | otherwise = (obtenerPorPosicion posicion fila) : (valores filas (posicionSiguiente:posiciones) (filaActual + 1))
+```
