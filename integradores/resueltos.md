@@ -210,3 +210,13 @@ valores (fila:filas) (posicion:posicionSiguiente:posiciones) filaActual | (filaP
                                                                         | (filaPosicion posicion) == (filaPosicion posicionSiguiente) = (obtenerPorPosicion posicion fila) : valores (fila:filas) (posicionSiguiente:posiciones) filaActual
                                                                         | otherwise = (obtenerPorPosicion posicion fila) : (valores filas (posicionSiguiente:posiciones) (filaActual + 1))
 ```
+
+### Ejercicio 8. Implementar la funcion esCaminoFibo :: [Int] -> Int -> Bool
+
+```
+problema esCaminoFibo (s:seq<Z>, i: Z) : Bool {
+    requiere: {la secuencia de numeros s es no vacia y esta compuesta por numeros positivos (mayor estricto que 0) que representan los valores de un camino en un tablero}
+    requiere: {i>= 0}
+    asegura: {res = true <=> los valores de s son la sucesion de Fibonacci inicializada con el numero pasado como paratro i}
+}
+```

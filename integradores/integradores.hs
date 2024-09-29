@@ -116,3 +116,17 @@ valores (fila:filas) [ultimaPosicion] _ = (obtenerPorPosicion ultimaPosicion fil
 valores (fila:filas) (posicion:posicionSiguiente:posiciones) filaActual | (filaPosicion posicion) /= filaActual = valores filas (posicion:posicionSiguiente:posiciones) (filaActual + 1)
                                                                         | (filaPosicion posicion) == (filaPosicion posicionSiguiente) = (obtenerPorPosicion posicion fila) : valores (fila:filas) (posicionSiguiente:posiciones) filaActual
                                                                         | otherwise = (obtenerPorPosicion posicion fila) : (valores filas (posicionSiguiente:posiciones) (filaActual + 1))
+
+
+-- Ejercicio 8
+
+
+esCaminoFibo :: [Int] -> Int -> Bool
+esCaminoFibo [ultimoValor] indice = ultimoValor == (fibonacci indice)
+esCaminoFibo (valor:valores) indiceActual = (valor == fibonacci indiceActual) && esCaminoFibo valores (indiceActual + 1)
+
+
+fibonacci :: Int -> Int
+fibonacci 0 = 0
+fibonacci 1 = 1
+fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
