@@ -155,12 +155,12 @@ sonAmigos x y = (sumaEnteros (divisoresPropios x)) == y && (sumaEnteros (divisor
 
 -- Ejercicio 11
 
+losPrimerosNPerfectos :: Int -> [Int]
+losPrimerosNPerfectos n = primerosPerfectos n 0 1
+
 esPerfecto :: Int -> Bool
 esPerfecto 1 = False
 esPerfecto n = n == sumaEnteros (divisoresPropios n)
-
-losPrimerosNPerfectos :: Int -> [Int]
-losPrimerosNPerfectos n = primerosPerfectos n 0 1
 
 
 primerosPerfectos :: Int -> Int -> Int -> [Int]

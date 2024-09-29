@@ -236,5 +236,63 @@ fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
 
 ```
 problema divisoresPropios(n: Z) : seq<Z> {
+ requiere: {n > 0}
+ asegura: {res es la lista de divisores de propios de n, ordenada de mayor a menor}
 }
+```
+
+```haskell
+divisoresPropios :: Int -> [Int]
+divisoresPropios 1 = [1]
+divisoresPropios n = 1 : obtenerDivisores n 2
+
+obtenerDivisores :: Int -> Int -> [Int]
+obtenerDivisores dividendo divisorActual | dividendo == divisorActual = []
+obtenerDivisores dividendo divisorActual | mod dividendo divisorActual == 0 = divisorActual : obtenerDivisores dividendo (divisorActual + 1)
+                                         | otherwise = obtenerDivisores dividendo (divisorActual + 1)
+```
+
+### Ejercicio 10. Implementar la funcion sonAmigos :: Int -> Int -> Bool
+
+```
+problema sonAmigos(n,m: Z) : Bool {
+    require: {n > 0 }
+    require: {m > 0}
+    require: {m != n}
+    asegura: {res = True <=> n y m son numeros amigos}
+}
+```
+
+```haskell
+sumaEnteros :: [Int] -> Int
+sumaEnteros [] = 0
+sumaEnteros (actualElemento:elementos) = actualElemento + sumaEnteros elementos
+
+
+sonAmigos :: Int -> Int -> Bool
+sonAmigos x y = (sumaEnteros (divisoresPropios x)) == y && (sumaEnteros (divisoresPropios y)) == x
+```
+
+### Ejercicio 11. Implementar la funcion losPrimerosNPerfectos
+
+```
+problema losPrimerosNPerfectos(n: Z) : seq<Z> {
+    requiere: {n > 0}
+    asegura: {res es la lista de los primeros n numeros perfectos, de menor a mayor}
+}
+```
+
+```haskell
+losPrimerosNPerfectos :: Int -> [Int]
+losPrimerosNPerfectos n = primerosPerfectos n 0 1
+
+esPerfecto :: Int -> Bool
+esPerfecto 1 = False
+esPerfecto n = n == sumaEnteros (divisoresPropios n)
+
+
+primerosPerfectos :: Int -> Int -> Int -> [Int]
+primerosPerfectos cantidadDePerfectos encontrados _ | cantidadDePerfectos == encontrados = []
+primerosPerfectos cantidadDePerfectos encontrados numeroActual | esPerfecto numeroActual && encontrados < cantidadDePerfectos = numeroActual : primerosPerfectos cantidadDePerfectos (encontrados + 1) (numeroActual + 1)
+                                                               | otherwise = primerosPerfectos cantidadDePerfectos encontrados (numeroActual + 1)
 ```
