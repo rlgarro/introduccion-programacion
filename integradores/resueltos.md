@@ -231,3 +231,10 @@ fibonacci 0 = 0
 fibonacci 1 = 1
 fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
 ```
+
+### Ejercicio 9. Implementar la funcion divisoresPropios :: Int -> [Int]
+
+```
+problema divisoresPropios(n: Z) : seq<Z> {
+}
+```

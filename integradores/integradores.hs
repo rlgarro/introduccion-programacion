@@ -130,3 +130,42 @@ fibonacci :: Int -> Int
 fibonacci 0 = 0
 fibonacci 1 = 1
 fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
+
+--- Ejercicio 9
+
+divisoresPropios :: Int -> [Int]
+divisoresPropios 1 = [1]
+divisoresPropios n = 1 : obtenerDivisores n 2
+
+obtenerDivisores :: Int -> Int -> [Int]
+obtenerDivisores dividendo divisorActual | dividendo == divisorActual = []
+obtenerDivisores dividendo divisorActual | mod dividendo divisorActual == 0 = divisorActual : obtenerDivisores dividendo (divisorActual + 1)
+                                         | otherwise = obtenerDivisores dividendo (divisorActual + 1)
+
+
+-- Ejercicio 10
+
+sumaEnteros :: [Int] -> Int
+sumaEnteros [] = 0
+sumaEnteros (actualElemento:elementos) = actualElemento + sumaEnteros elementos
+
+
+sonAmigos :: Int -> Int -> Bool
+sonAmigos x y = (sumaEnteros (divisoresPropios x)) == y && (sumaEnteros (divisoresPropios y)) == x
+
+-- Ejercicio 11
+
+esPerfecto :: Int -> Bool
+esPerfecto 1 = False
+esPerfecto n = n == sumaEnteros (divisoresPropios n)
+
+losPrimerosNPerfectos :: Int -> [Int]
+losPrimerosNPerfectos n = primerosPerfectos n 0 1
+
+
+primerosPerfectos :: Int -> Int -> Int -> [Int]
+primerosPerfectos cantidadDePerfectos encontrados _ | cantidadDePerfectos == encontrados = []
+primerosPerfectos cantidadDePerfectos encontrados numeroActual | esPerfecto numeroActual && encontrados < cantidadDePerfectos = numeroActual : primerosPerfectos cantidadDePerfectos (encontrados + 1) (numeroActual + 1)
+                                                               | otherwise = primerosPerfectos cantidadDePerfectos encontrados (numeroActual + 1)
+
+-- Ejercicio 12
