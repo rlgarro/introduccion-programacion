@@ -67,26 +67,18 @@ maximoEnFila (actual:restoDeFila) | actual > maximoFilaRestante = actual
 type Aparicion = (Int,Int) -- (numero, cantidad de apariciones de numero)
 
 masRepetido :: Tablero -> Int
-masRepetido tablero = fst (masOcurrente (apariciones (unificarEnFila tablero)))
+masRepetido tablero = masOcurrente tableroUnificado tableroUnificado
+                    where 
+                    tableroUnificado = unificarEnFila tablero
 
-masOcurrente :: [Aparicion] -> Aparicion
-masOcurrente [aparicion] = aparicion
-masOcurrente (actual:restoApariciones) | snd actual > snd (masOcurrente restoApariciones) = actual
-                                       | otherwise = masOcurrente restoApariciones
+masOcurrente :: Fila -> Fila -> Int
+masOcurrente [ultimoElem] _ = ultimoElem
+masOcurrente (actual:siguiente:restantes) filaCompleta | snd (aparicion actual filaCompleta) > snd (aparicion siguiente filaCompleta) = masOcurrente (actual:restantes) filaCompleta
+                                                       | otherwise = masOcurrente (siguiente:restantes) filaCompleta
 
 unificarEnFila :: Tablero -> Fila
 unificarEnFila [] = []
 unificarEnFila (filaActual:restoFilas) = (unificarEnFila restoFilas) ++ filaActual
-
-quitarTodos :: (Eq a) => a -> [a] -> [a]
-quitarTodos _ [] = []
-quitarTodos elem (x:xs) | elem == x = quitarTodos elem xs
-                        | otherwise = x : quitarTodos elem xs
-
-apariciones :: Fila -> [Aparicion]
-apariciones [] = []
-apariciones (elemento:elementosRestantes) = (elemento, (snd aparicionElemActual) + 1) : apariciones (quitarTodos elemento elementosRestantes)
-                                          where aparicionElemActual = (aparicion elemento elementosRestantes)
 
 aparicion :: Int -> Fila -> Aparicion
 aparicion n [] = (n, 0)
