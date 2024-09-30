@@ -231,3 +231,30 @@ sumaAcumulada lista = acumulada ++ [(ultimo lista + ultimo acumulada)]
 
 ### 2. descomponerEnPrimos :: [Integer] -> [[Integer]]
 
+```haskell
+descomponerEnPrimos :: [Integer] -> [[Integer]]
+descomponerEnPrimos [] = []
+descomponerEnPrimos [ultimo] = [obtenerPrimos ultimo 2]
+descomponerEnPrimos (actual:restantes) = (obtenerPrimos actual 2) : (descomponerEnPrimos restantes)
+
+obtenerPrimos :: Integer -> Integer -> [Integer]
+obtenerPrimos n primo | 1 == n || esPrimo n = [n]
+                      | mod n primo == 0 && (div n primo /= 1) = primo : obtenerPrimos (div n primo) primo
+                      | mod n primo == 0 && (div n primo == 1) = [primo]
+                      | otherwise = obtenerPrimos n (siguientePrimo (primo + 1))
+
+siguientePrimo :: Integer -> Integer
+siguientePrimo n | esPrimo n = n
+                 | otherwise = siguientePrimo (n + 1)
+
+esPrimo :: Integer -> Bool
+esPrimo 1 = False
+esPrimo 2 = True
+esPrimo n = divisores == [n]
+          where divisores = obtenerDivisores n 2
+
+obtenerDivisores :: Integer -> Integer -> [Integer]
+obtenerDivisores dividendo divisorActual | dividendo == divisorActual = [dividendo]
+                                         | mod dividendo divisorActual == 0 = divisorActual : obtenerDivisores dividendo (divisorActual + 1)
+                                         | otherwise = obtenerDivisores dividendo (divisorActual + 1)
+```
