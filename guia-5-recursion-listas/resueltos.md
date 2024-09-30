@@ -215,3 +215,19 @@ ordenar [] = []
 ordenar xs = ordenar (quitar maximo_lista xs) ++ [maximo_lista]
            where maximo_lista = maximo xs
 ```
+
+# Ejercicio 5
+
+### 1. sumaAcumulada
+
+
+```haskell
+sumaAcumulada :: (Num t) => [t] -> [t]
+sumaAcumulada [] = []
+sumaAcumulada [ultimo] = [ultimo]
+sumaAcumulada lista = acumulada ++ [(ultimo lista + ultimo acumulada)]
+                    where acumulada = sumaAcumulada (principio lista)
+```
+
+### 2. descomponerEnPrimos :: [Integer] -> [[Integer]]
+

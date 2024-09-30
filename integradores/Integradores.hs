@@ -1,3 +1,5 @@
+module Integradores where
+
 -- Ejercicio 1: Sistema de stock
 
 generarStock :: [String] -> [(String, Int)]

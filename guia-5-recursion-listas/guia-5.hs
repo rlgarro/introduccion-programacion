@@ -79,3 +79,11 @@ ordenar :: (Ord t) => [t] -> [t]
 ordenar [] = []
 ordenar xs = ordenar (quitar maximo_lista xs) ++ [maximo_lista]
            where maximo_lista = maximo xs
+
+-- Ejercicio 5
+
+sumaAcumulada :: (Num t) => [t] -> [t]
+sumaAcumulada [] = []
+sumaAcumulada [ultimo] = [ultimo]
+sumaAcumulada lista = acumulada ++ [(ultimo lista + ultimo acumulada)]
+                    where acumulada = sumaAcumulada (principio lista)
