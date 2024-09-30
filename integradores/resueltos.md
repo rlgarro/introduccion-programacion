@@ -143,31 +143,19 @@ asegura: {res es igual al numero que mas eces aparece en un tablero t. Si hay em
 ```haskell
 type Aparicion = (Int,Int) -- (numero, cantidad de apariciones de numero)
 
--- La idea es no procesar fila a fila quien se repite mas y sumarlo mientras se iteran las filas,
--- sino unificar todas las filas en una sola para despues comparar quien se repite mas entre una sola fila.
--- De esta forma se simplifica mucho el problema.
-
 masRepetido :: Tablero -> Int
-masRepetido tablero = fst (masOcurrente (apariciones (unificarEnFila tablero)))
+masRepetido tablero = masOcurrente tableroUnificado tableroUnificado
+                    where 
+                    tableroUnificado = unificarEnFila tablero
 
-masOcurrente :: [Aparicion] -> Aparicion
-masOcurrente [aparicion] = aparicion
-masOcurrente (actual:restoApariciones) | snd actual > snd (masOcurrente restoApariciones) = actual
-                                       | otherwise = masOcurrente restoApariciones
+masOcurrente :: Fila -> Fila -> Int
+masOcurrente [ultimoElem] _ = ultimoElem
+masOcurrente (actual:siguiente:restantes) filaCompleta | snd (aparicion actual filaCompleta) > snd (aparicion siguiente filaCompleta) = masOcurrente (actual:restantes) filaCompleta
+                                                       | otherwise = masOcurrente (siguiente:restantes) filaCompleta
 
 unificarEnFila :: Tablero -> Fila
 unificarEnFila [] = []
 unificarEnFila (filaActual:restoFilas) = (unificarEnFila restoFilas) ++ filaActual
-
-quitarTodos :: (Eq a) => a -> [a] -> [a]
-quitarTodos _ [] = []
-quitarTodos elem (x:xs) | elem == x = quitarTodos elem xs
-                        | otherwise = x : quitarTodos elem xs
-
-apariciones :: Fila -> [Aparicion]
-apariciones [] = []
-apariciones (elemento:elementosRestantes) = (elemento, (snd aparicionElemActual) + 1) : apariciones (quitarTodos elemento elementosRestantes)
-                                          where aparicionElemActual = (aparicion elemento elementosRestantes)
 
 aparicion :: Int -> Fila -> Aparicion
 aparicion n [] = (n, 0)
