@@ -1,5 +1,5 @@
-# IMPORTS
 from queue import LifoQueue as Pila
+from queue import Queue as Cola
 import random
 
 def imprimir_pila(pila : Pila):
@@ -125,3 +125,108 @@ def esta_bien_balanceada(formula : str) -> bool:
         return False
 
     return True
+
+'''
+#### EJERCICIO 10
+Dada una cola de enteros, devuelve el maximo.
+'''
+
+# cola es de tipo in, entonces su valor inicial si importa (es tomado en cuenta) y ademas no debe modificarse dentro de la funcion
+#def buscar_el_maximo(cola : Cola[int]):
+
+def imprimir_cola(c : Cola[int]):
+    if c.empty():
+        return
+    
+    cola_temp = Cola()
+    while not (c.empty()):
+        el = c.get()
+        print('{0}, '.format(el), end="")
+        cola_temp.put(el)
+    print("")
+    
+    while not (cola_temp.empty()):
+        c.put(cola_temp.get())
+
+def buscar_el_maximo(c : Cola[int]):
+    maximo : int = 0
+
+    cola_temp = Cola()
+    while not (c.empty()):
+        el = c.get()
+        if el > maximo:
+            maximo = el
+        cola_temp.put(el)
+
+    while not (cola_temp.empty()):
+        c.put(cola_temp.get())
+
+    return maximo
+
+'''
+c = Cola()
+c.put(1)
+c.put(2)
+c.put(3)
+c.put(1)
+c.put(10)
+
+print(buscar_el_maximo(c))
+imprimir_cola(c)
+'''
+
+
+'''
+#### EJERCICIO 16
+Leer un archivo de texto y agrupar la cantidad de palabras de acuerdo a su longitud.
+el archivo es de tipo in, es decir que nos conviene abrirlo en formato read only.
+'''
+
+def agrupar_por_longitud(archivo : str) -> dict:
+    file = open(archivo, 'r', encoding="utf-8")
+    words_by_size : dict = {}
+    for line in file:
+        words : [str] = get_words(line)
+        for word in words:
+            size : int = length(word)
+            if found_in_dictionary(size, words_by_size):
+                words_by_size[size] += 1
+            else:
+                words_by_size[size] = 1
+
+    file.close()
+    return words_by_size
+
+
+
+
+def get_words(line : str) -> str:
+    word : str = ""
+    words : [str] = []
+    line_size = length(line)
+    for i in range(line_size):
+        if line[i] == " " or i == (line_size - 1):
+            words.append(word)
+            word = ""
+            continue
+
+        word += line[i]
+
+    return words
+
+def length(line : str) -> int:
+    size : int = 0
+    for i in line:
+        size += 1
+
+    return size
+
+def found_in_dictionary(key : int, dictionary : dict) -> bool:
+    for element in dictionary.keys():
+        if (key == element):
+            return True
+
+    return False
+
+print(agrupar_por_longitud("prueba.txt"))
+
