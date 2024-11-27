@@ -1,0 +1,398 @@
+<h1>Parcial - tema2</h1>
+<p>Nota: 10.0 / 10.0 (APROBADO)</p>
+<pre><code>puntaje ej1: 2
+puntaje ej2: 2
+puntaje ej3: 2
+puntaje ej4: 3
+puntaje ej5: 1
+</code></pre>
+<h2>Datos del alumno</h2>
+<p>Nombre: Roman Lopez Garro</p>
+<p>DNI: 44451063</p>
+<p>LU: 1097/22</p>
+<p>Maquina: 41-08</p>
+<h2>Enunciado</h2>
+<html>
+
+<head>
+  <link rel="icon" href="data:,">
+  <link href="css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+<div>
+
+<h1> Parcial Haskell - Tema 1 </h1>
+
+<p>
+
+<h2> Importante </h2>
+Template de funciones a implementar <a href="#" onclick="forceDownload('../parcial/Template_t1.hs','SolucionT1.hs');">aca</a><br>
+Lista de funciones permitidas <a href="/static/haskell_permitidas.html">aca</a><br>
+Ejemplo de hunit <a href="#" onclick="forceDownload('../parcial/Test_template_t1.hs','Test_template_t1.hs');">aca</a>
+
+<p>
+
+<form name="form1" action="/submit_examen" method="post" enctype="multipart/form-data" onsubmit="return validaciones(event)">
+
+<h2> Enunciado </h2>
+
+<ol>
+ <p>
+  Resolver los siguientes ejercicios cuyas especificaciones en lenguaje
+  semiformal figuran a continuación. Deben ser implementadas en Haskell utilizando los tipos
+  requeridos y solamente las funciones que se ven en la materia Introducción a la Programación / Algoritmos y Estructuras de Datos I (FCEyN-UBA).
+</p>
+
+<li> <strong>Ejercicio 1 (2 puntos)</strong></li>
+<p>problema maxMovilN (lista: seq⟨Z⟩, n: Z) : Z {<br>
+  &nbsp; <strong>requiere:</strong> {|<i>lista</i>| > 0} <br>
+  &nbsp; <strong>requiere:</strong> {n > 0 y n es menor a la longitud de la <i>lista</i>} <br>
+  &nbsp; <strong>asegura:</strong> {<i>res</i> es el máximo de los últimos <i>n</i> elementos de <i>lista</i>.} <br>
+}<br>
+</p>
+
+  <li> <strong>Ejercicio 2 (2 puntos)</strong></li>
+  <p>problema promedioPrimo (<i>n</i>: Z) : Float {<br>
+    &nbsp; <strong>requiere:</strong> {n > 1} <br>
+    &nbsp; <strong>asegura:</strong> {(<i>res</i> es el promedio de todos los factores primos de n (distintos o no).} <br>
+    }<br>
+
+    <p>Aclaración: los factores primos de 30 son [5,3,2]. Los factores primos de 9 son [3,3].
+  </p>
+
+  <li> <strong>Ejercicio 3 (2 puntos)</strong></li>
+  <p>problema letrasIguales (<i>palabra</i>: seq⟨Char⟩) : Z {<br>
+    &nbsp; <strong>requiere:</strong> {True} <br>
+    &nbsp; <strong>asegura:</strong> {(<i>res</i> es la cantidad de caracteres no blancos repetidos en <i>palabra</i>.} <br>
+    }<br>
+  </p>
+
+  <li> <strong>Ejercicio 4 (3 puntos)</strong></li>
+  <p>problema  cuantosIguales (<i>palabra1</i>: seq⟨Char⟩, <i>palabra2</i>: seq⟨Char⟩) : Z⟩{<br>
+    &nbsp; <strong>requiere:</strong> {True}<br>
+    &nbsp; <strong>asegura:</strong> {<i>res</i> es igual a la cantidad de caracteres no blancos y distintos que <i>palabra1</i> y <i>palabra2</i> tienen en común.} <br>
+  }<br>
+  </p>
+
+  <li> <strong>Ejercicio 5 (1 punto)</strong></li>
+  <p>
+    ¿Cuál de las siguientes afirmaciones es correcta sobre el uso de pattern matching en Haskell? <br>
+
+  <input type="radio" name="mchoice_1" id="opcion1" value="1" />
+      <label for="opcion1">Pattern matching en Haskell solo se utiliza con listas y tuplas.</label> <br>
+  <input type="radio" name="mchoice_1" id="opcion2" value="2" />
+      <label for="opcion2">Pattern matching en Haskell permite seleccionar qué cláusula de una definición de función ejecutar según la forma de los parámetros.</label> <br>
+  <input type="radio" name="mchoice_1" id="opcion3" value="3" />
+      <label for="opcion3">Pattern matching en Haskell siempre debe manejar todas las posibles combinaciones de patrones, de lo contrario, el compilador lanzará un error.</label> <br>
+  </p>
+
+</ol>
+
+<hr>
+  <h3 style="color:#1A5276">Adjunta el archivo con tu solución:</h3>
+  <p><b style="color:red">Solo se puede adjuntar 1 archivo de extensión .hs. En caso de haber desarrollado tests propios, no deben ser entregados.</b></p>
+
+  <label for="archivo">Seleccionar archivo a enviar:</label>
+  <input type="file" id="archivo" name="archivo" required accept=".hs,text/x-haskell"/>
+
+  <input type="submit" value="Enviar"
+        style= "background-color: #1A5276; border-radius: 5px;
+                margin-top:10px;padding: 10px 150px;color: #FFFFFF;
+                font-size: 20px;cursor: pointer; width:100%" >
+
+</form>
+
+</div>
+
+<script>
+  function validaciones(event) {
+    var confirmacion = confirm("Confirmo que revise mis respuestas y que quiero entregar mi examen");
+    if (!confirmacion) {
+        event.preventDefault();
+        event.returnValue = false;
+        return false;
+      }
+      event.returnValue = true;
+      return true;
+  }
+</script>
+
+<script>
+// registro una funcion para mostrar el archivo cuando se adjunta.
+// de esa forma evitamos que se adjunten otros archivos por error
+document
+  .getElementById('archivo')
+  .addEventListener(
+      'change',
+      function () {
+          var fr = new FileReader();
+          fr.onload = function () {
+              alert(this.result);
+          };
+          fr.readAsText(this.files[0]);
+      }
+  );
+
+// para forzar a bajar el template de hunit y que no se pueda abrir en un nuevo tab
+// (el browser intenta mostrar el codigo como HTML y el formato se ve raro)
+function forceDownload(url, filename) {
+  fetch(url).then(function(t) {
+    return t.blob().then((b) => {
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(b);
+      a.setAttribute("download", filename);
+      a.click();
+    });
+  });
+}
+</script>
+
+</body>
+
+</html>
+
+<h2>Solucion entregada por el alumno</h2>
+<pre><code>module SolucionT1 where
+
+
+-- Ejercicio 1
+maxMovilN :: [Integer] -&gt; Integer -&gt; Integer
+maxMovilN (x:xs) n = maximo (obtenerUltimosN (x:xs) n)
+
+ultimo :: [Integer] -&gt; Integer
+ultimo [ultimo] = ultimo
+ultimo (x:xs) = ultimo xs
+
+principio :: [Integer] -&gt; [Integer]
+principio [ultimo] = []
+principio (x:xs) = x : (principio xs)
+
+obtenerUltimosN :: [Integer] -&gt; Integer -&gt; [Integer]
+obtenerUltimosN lista 1 = [ultimo lista]
+obtenerUltimosN lista n = obtenerUltimosN (principio lista) (n - 1) ++ [ultimo lista]
+
+maximo :: [Integer] -&gt; Integer
+maximo [ultimo] = ultimo
+maximo (actual: restantes) | actual &gt; maximo restantes = actual
+                           | otherwise = maximo restantes
+
+-- Ejercicio 2
+promedioPrimo :: Integer -&gt; Float
+promedioPrimo n =  fromInteger (sumar factoresPrimos) / fromInteger (len factoresPrimos)
+                where 
+                factoresPrimos = (obtenerFactoresPrimos n 2)
+
+len :: [a] -&gt; Integer
+len [] = 0
+len (x:xs) = 1 + (len xs)
+
+obtenerFactoresPrimos :: Integer -&gt; Integer -&gt; [Integer]
+obtenerFactoresPrimos 2 _ = [2]
+obtenerFactoresPrimos 1 _ = []
+obtenerFactoresPrimos n primoActual | mod n primoActual == 0 = primoActual : obtenerFactoresPrimos (div n primoActual) primoActual
+                                    | otherwise = obtenerFactoresPrimos n (siguientePrimo (primoActual + 1))
+
+siguientePrimo :: Integer -&gt; Integer
+siguientePrimo inicio | esPrimo inicio = inicio
+                      | otherwise = siguientePrimo (inicio + 1)
+
+esPrimo :: Integer -&gt; Bool
+esPrimo n = (obtenerDivisores n 1) == [1, n]
+
+obtenerDivisores :: Integer -&gt; Integer -&gt; [Integer]
+obtenerDivisores dividendo divisorActual | dividendo == divisorActual = [divisorActual]
+                                         | mod dividendo divisorActual == 0 = divisorActual : obtenerDivisores dividendo (divisorActual + 1)
+                                         | otherwise = obtenerDivisores dividendo (divisorActual + 1)
+sumar :: [Integer] -&gt; Integer
+sumar [ultimo] = ultimo
+sumar (x:xs) = x + (sumar xs)
+
+-- Ejercicio 3
+letrasIguales :: String -&gt; Integer
+letrasIguales &quot;&quot; = 0
+letrasIguales [ultimo] = 0
+letrasIguales (actual:restantes) | ((apariciones actual restantes) + 1) &gt; 1 = 1 + letrasIguales (sacarCaracter actual restantes)
+                                 | otherwise = letrasIguales restantes
+
+apariciones :: Char -&gt; String -&gt; Integer
+apariciones _ &quot;&quot; = 0
+apariciones ' ' _ = 0
+apariciones char (actual:restantes) | char == actual = 1 + (apariciones char restantes)
+                                    | otherwise = (apariciones char restantes)
+
+sacarCaracter :: Char -&gt; String -&gt; String
+sacarCaracter _ [] = []
+sacarCaracter char (actual:restantes) | char == actual = (sacarCaracter char restantes)
+                                      | otherwise = actual : (sacarCaracter char restantes)
+
+-- Ejercicio 4
+cuantosIguales :: String -&gt; String -&gt; Integer
+cuantosIguales &quot;&quot; _ = 0
+cuantosIguales _ &quot;&quot;  = 0
+cuantosIguales (char1:restantes1) palabra2 | char1 /= ' ' &amp;&amp; (pertenece char1 palabra2) = 1 + cuantosIguales (restantes1) (sacarCaracter char1 palabra2)
+                                            | otherwise = cuantosIguales restantes1 palabra2 
+
+pertenece :: (Eq a) =&gt; a -&gt; [a] -&gt; Bool
+pertenece a [] = False
+pertenece buscado (actual:restantes) | buscado == actual = True
+                                     | otherwise = (pertenece buscado restantes)
+
+</code></pre>
+<h2>Resultado de la compilacion</h2>
+<pre><code>Loaded package environment from /home/ignacio/.ghc/x86_64-linux-9.4.7/environments/default
+[1 of 1] Compiling SolucionT1       ( correcciones/haskell-tn/lopez_garro_roman_44451063/submission.hs.main.hs, correcciones/haskell-tn/lopez_garro_roman_44451063/submission.hs.main.o )
+
+</code></pre>
+<h2>Ejecucion de los tests</h2>
+<h3>tema2-test-ej1.hs.compilacion.out</h3>
+<p>Puntaje del ej: 2 / 2</p>
+<pre><code>
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+Cases: 10  Tried: 10  Errors: 0  Failures: 0
+
+</code></pre>
+<h3>tema2-test-ej2.hs.compilacion.out</h3>
+<p>Puntaje del ej: 2 / 2</p>
+<pre><code>
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+Cases: 6  Tried: 6  Errors: 0  Failures: 0
+
+</code></pre>
+<h3>tema2-test-ej3.hs.compilacion.out</h3>
+<p>Puntaje del ej: 2 / 2</p>
+<pre><code>
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+Cases: 6  Tried: 6  Errors: 0  Failures: 0
+
+</code></pre>
+<h3>tema2-test-ej4.hs.compilacion.out</h3>
+<p>Puntaje del ej: 3 / 3</p>
+<pre><code>
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+
+Cases: 1  Tried: 1  Errors: 0  Failures: 0
+
+
+Cases: 6  Tried: 6  Errors: 0  Failures: 0
+
+</code></pre>
+<h3>mchoice.json-ej5.compilacion.out</h3>
+<p>Puntaje del ej: 1 / 1</p>
+<pre><code>mchoice ej5: respuesta del alumno=2, respuesta correcta=2
+
+Ran 1 test in 0 seconds
+
+OK
+
+</code></pre>
+<p>FIN</p>
